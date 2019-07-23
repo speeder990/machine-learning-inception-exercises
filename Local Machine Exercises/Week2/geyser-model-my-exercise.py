@@ -4,15 +4,15 @@ import numpy as np
 import scipy as sp
 from matplotlib import pyplot as plt
 
+# Note: Original comments from the example were retained.
+
 # ################################
 # #####  Our Custom Methods ######
 # ################################
 
 # Method to estimate the coefficients
 # Detailed Derivation of beta_1 and beta_0 estimation is present at the url:
-# https://are.berkerly.edu/courses/EEP118/current/derive_ols.pdf
-# Y = B1*X + B0
-
+# https://are.berkeley.edu/courses/EEP118/current/derive_ols.pdf
 
 def slr(X, Y):
     intermediate_beta = []
@@ -26,7 +26,7 @@ def slr(X, Y):
         beta_1 = beta_1_numerator_sum/beta_1_denominator_sum
         beta_0 = np.mean(Y) - ((beta_1)*np.mean(X))
 
-        return [beta_0, beta_1, intermediate_beta]
+    return [beta_0, beta_1, intermediate_beta]
 
 # Method to predict response variable Y (in this case interval before the next erruption) for new values
 # of X (in this case duration of eruption) using the estimated coefficients.
@@ -71,6 +71,10 @@ for row in reader:
 # Close the file once we have successfully stored all data into our X and Y variables
 f.close()
 
+# Visualize the data using Scatter plot of matplotlib library. A scatter plot is a plot between two continuous variables.
+# and it helps us in determining the relationship between those two continuous variables.
+# For more information on working of scatter plot function of matplotlib - you can visit the following url:
+# https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html
 
 # ###########################
 # ### Data Visualization ####
@@ -78,8 +82,7 @@ f.close()
 
 # Visualize the data using Scatter plot of matplotlib library. A scatter plot is a plot between two continuous variables
 # and it helps us in determining the relationship between those two continuous variables.
-# For more information on working of scatter plot function of matplotlib - you can visit the following url:
-# https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html
+
 
 plt.scatter(X, Y, s=2)
 plt.xlabel("Duration of Eruption (in minutes)")
@@ -115,7 +118,7 @@ for idx in range(0, len(X)):
     actual_y = Y[idx]
     predicted_y = predict(coefficients, X[idx])
     RSS = RSS + ((actual_y - predicted_y)**2)
-RSE = np.sqrt((1/float(len(X)-2))**RSS)
+RSE = np.sqrt((1/float(len(X)-2))*RSS)
 
 print("Residual Standard Error:", RSE)
 print("% Residual Standard Error (over average interval):", (RSE/np.mean(Y))*100)
